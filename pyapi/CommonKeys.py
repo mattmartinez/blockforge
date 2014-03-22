@@ -1,5 +1,3 @@
-
-
 class CommonKeys():
 
     GPUS_STATUS = "gpus_status"  # array of the things below

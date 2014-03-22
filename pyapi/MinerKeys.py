@@ -1,5 +1,3 @@
-
-
 class MinerKeys():
     GPU_ID = "GPU"
     TEMPERATURE = "Temperature"

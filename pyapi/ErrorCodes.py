@@ -1,5 +1,3 @@
-
-
 class ErrorCodes():
     OK = 0
     BAD_SGMINER = 1

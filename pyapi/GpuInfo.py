@@ -2,7 +2,6 @@ from CommonKeys import *
 from MinerKeys import *
 
 
-
 class GpuInfo():
 
 

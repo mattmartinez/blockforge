@@ -4,9 +4,7 @@ from ErrorCodes import *
 import BaseHTTPServer
 import GpuInfo
 import sgminerapi
-import json
-import os
-import time
+import json,os,time
 import redis
 
 api = sgminerapi.api()
@@ -39,12 +37,21 @@ class Handler(BaseHTTPRequestHandler):
 		
 	#redis
         r = redis.StrictRedis(host='localhost', port=6379, db=0)
+
+	# Dev, so lets wipe these to start off
+	if r.keys("*") > 1:
+		r.flushall()
 	
 	gst = gpu_statuses
 	for i in range(len(gst)):
+        time = strftime("%m_%d_%Y-%H_%M_%S")
 		r.set("gpu_" + str(i) + "_hashrate", gst[int(i)]['hashrate'])
-		r.set("gpu_" + str(i) + "temp", gst[int(i)]['temperature'])
-
+		r.set("gpu_" + str(i) + "_temp", gst[int(i)]['temperature'])
+		r.set("gpu_" + str(i) + "_sacc", gst[int(i)]['shares_accepted'])
+		r.set("gpu_" + str(i) + "_srej", gst[int(i)]['shares_rejected'])
+		r.set("gpu_" + str(i) + "_lastw", gst[int(i)]['time_since_last_valid_work'])
+	
+				
 
         # send response (render it)
 
